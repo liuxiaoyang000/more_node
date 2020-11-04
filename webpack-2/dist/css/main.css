@@ -1,0 +1,11 @@
+body{
+  background: red;
+  -webkit-transform: translate('100px');
+          transform: translate('100px');
+}
+
+#back{
+  width: 100px;height: 100px;
+  background: url(https://www.fullstackjavascript.cn/e19d49fe4320ea8cb76e29811bebdd8c.png);
+  background-size: cover;
+}

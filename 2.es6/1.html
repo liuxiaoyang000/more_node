@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #box .box {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: red;
+      position: absolute;
+      left: 0
+    }
+
+    .box1 {
+      top: 100px
+    }
+
+    .box2 {
+      top: 250px
+    }
+
+    .box3 {
+      top: 400px
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <div class="box box1"></div>
+    <div class="box box2"></div>
+    <div class="box box3"></div>
+  </div>
+  <script>
+    let $ = document.querySelector.bind(document);
+    // function move(ele,target,callback) {
+    //     let left  = 0;
+    //     let timer = setInterval(function () {
+    //       if(left >= target){
+    //         clearInterval(timer);
+    //         return callback();
+    //       }
+    //       left++;
+    //       ele.style.left = left+'px';
+    //     },6)
+    // }
+    // 回调地狱 不方便维护 嵌套过多
+    // move($('.box1'),500,function () {
+    //    move($('.box2'), 500, function () {
+    //     move($('.box3'), 200, function () {
+    //        alert('ok');
+    //      })
+    //   })
+    // });
+    // promise 的写法
+    function move(ele, target) {
+      return new Promise((resolve, reject) => {
+        let left = 0;
+        let timer = setInterval(function () {
+          if (left >= target) {
+            clearInterval(timer);
+            return resolve();
+          }
+          left++;
+          ele.style.left = left + 'px';
+        }, 6)
+      })
+    }
+    // 2.使用promise的目的是解决回调的问题，但是会有回调产生
+    // move($('.box1'),500).then(()=>{
+    //   return move($('.box2'), 500)
+    // }).then(()=>{
+    //    return move($('.box3'), 500)
+    // }).then(()=>{
+    //   return 'ok'
+    // }).then((data)=>{
+    //   alert(data)
+    // })
+    // 3.generator * 用的时候 yield  暂停 一个函数被分割成了若干个小函数，每次调用时会把调用的指针向下移动
+    // function* gen() {
+    //   let a = yield move($('.box1'), 500);
+    //   console.log(a)
+    //   let b = yield move($('.box2'), 300)
+    //   yield 1
+    //   console.log(b);
+    //   let c = yield move($('.box3'), 100)
+    //   console.log(c);
+    //   return undefined
+    // }
+    // let it = gen();
+    // let i = 0;
+    // function co(it) {
+    //   return new Promise((resolve, reject) => {
+    //     function next(val){
+    //       let { value, done } = it.next(val);
+    //       if(!done){
+    //         Promise.resolve(value).then(() => {
+    //           next(++i);
+    //         })
+    //       }else{
+    //         resolve(11000);
+    //       }
+    //     }
+    //     next();
+    //   })
+    // }
+    // co(gen()).then((data) => {
+    //   console.log(data);
+    // })
+    // dva redux-saga koa1.0
+
+    // 4.async+await (终极异步解决方案)
+    // 1.callback 回调问题
+    // 2.异步方法不能tryCatch 不能捕获错误异常
+    // 3.让代码执行的更像同步执行
+    // 4.await 要搭配async来使用
+    async function gen() {
+      try{
+        let a = await move($('.box1'), 300);
+        let b = await 1;
+        throw 199
+        let c = await move($('.box2'), 400);
+      }catch(e){
+        console.log('catch e')
+      }
+      return b;
+    }
+    gen().then(function (data) {
+      console.log(data);
+    }).catch((err)=>{
+      console.log('err',err)
+    });
+    // generator + co 来实现的 语法糖
+   
+  </script>
+</body>
+
+</html>

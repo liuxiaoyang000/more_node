@@ -1,0 +1,13 @@
+{
+  "name": "15.koa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "koa": "^2.6.2",
+    "koa-better-body": "^3.0.4",
+    "koa-bodyparser": "^4.2.1",
+    "uuid": "^3.3.2"
+  }
+}

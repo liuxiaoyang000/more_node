@@ -1,0 +1,10 @@
+body{
+  background: red;
+  transform: translate('100px');
+}
+
+#back{
+  width: 100px;height: 100px;
+  background: url('./qq.png');
+  background-size: cover;
+}

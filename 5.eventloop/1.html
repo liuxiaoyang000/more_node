@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    let worker = new Worker('./1.js');
+    worker.postMessage(10000);
+    worker.onmessage = function (e) {
+      console.log(e.data);
+    }
+    console.log('hah')
+    // setImmediate(function () {
+    //   console.log('setImmediate')
+    // });
+    // console.log('hello');
+    // setTimeout(function (name){
+    //   console.log('timeout')
+    // },0);
+
+
+      // let channel = new MessageChannel();
+      // let port1 = channel.port1;
+      // let port2 = channel.port2;
+      // port1.postMessage('hello');
+      // console.log('-----------------')
+      // port2.onmessage = function (e) {
+      //   console.log(e.data);
+      // };
+      // console.log('-----------------')
+      let observer = new MutationObserver(function () {
+        console.log('当前节点 已经更新完')
+      });
+      observer.observe(app,{
+        childList:true
+      });
+      for (let i = 0; i < 10; i++) {
+        app.appendChild(document.createElement('p'));
+      }
+  </script>    
+</body>
+</html>

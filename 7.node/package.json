@@ -1,0 +1,17 @@
+{
+  "name": "7.node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1.module.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "mime": "^2.3.1",
+    "mz": "^2.7.0"
+  },
+  "devDependencies": {}
+}

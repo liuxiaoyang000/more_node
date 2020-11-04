@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- ajax 有跨域问题 localhost:8080/ajax.html -> 8080 -->
+  <!-- 原生ajax fetch axios   -->
+  <script>
+    let xhr = new XMLHttpRequest();
+    xhr.open('post','http://localhost:3000/reg',true);
+    xhr.setRequestHeader('Content-Type','application/json');
+    //xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    xhr.onload = function () {
+      console.log(xhr.response);
+    }
+     xhr.send('{"name":"zfpx"}');
+    // xhr.send('name=zfpx')
+  </script>
+</body>
+</html>
